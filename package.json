@@ -1,0 +1,16 @@
+{
+  "name": "selfnumbers",
+  "version": "1.0.0",
+  "description": "Data tracking for a variety of personal analyses",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2",
+    "pg": "^8.7.1"
+  }
+}
