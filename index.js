@@ -60,6 +60,6 @@ app.post("/timestamps", async (req, res) => {
     }
 });
 
-app.listen(5000, () => {
+app.listen((process.env.PORT || 5000), () => { // Probably needs to be a specific port in production!
     console.log("Running SelfNumbers server.");
 });
