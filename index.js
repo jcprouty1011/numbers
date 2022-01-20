@@ -1,5 +1,6 @@
 const express = require("express");
 const { Pool } = require("pg");
+const moment = require("moment");
 const app = express();
 
 const CREATED = 201;
@@ -48,10 +49,12 @@ app.get("/timestamps", async (req, res) => {
 });
 
 app.post("/timestamps", async (req, res) => {
+    const { label, stamp } = req.body;
+    const stampMoment = stamp ? moment(stamp) : moment();
     try {
         await pool.query(
-            "INSERT INTO timestamps (label, stamp) VALUES ($1, NOW())",
-            [req.body.label]
+            "INSERT INTO timestamps (label, stamp) VALUES ($1, $2)",
+            [label, stampMoment.format()]
         );
         res.status(CREATED).end();
     } catch (error) {
@@ -60,6 +63,6 @@ app.post("/timestamps", async (req, res) => {
     }
 });
 
-app.listen((process.env.PORT || 5000), () => { // Probably needs to be a specific port in production!
+app.listen((process.env.PORT || 5000), () => {
     console.log("Running SelfNumbers server.");
 });
